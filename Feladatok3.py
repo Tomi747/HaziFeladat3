@@ -61,6 +61,97 @@ def feladat_5():
             osszeg+=k
     return szorzat,osszeg
 
+def feladat_6():
+    strazsa=True
+    k=0
+    elozo = 0
+    elozo_elotti = 0
+    while strazsa:
+        k=k+1
+        aktualis=int(input())
+        if aktualis==0:
+            strazsa=False
+        elif elozo+elozo_elotti==aktualis:
+            print(aktualis)
+        elif k==1:
+            elozo=aktualis
+        else:
+            elozo_elotti=elozo
+            elozo=aktualis
+
+def feladat_7():
+    li=[]
+    strazsa=True
+    while strazsa:
+        a=int(input())
+        if a==0:
+            strazsa=False
+        else:
+            li.append(a)
+    a,b,c=0,0,0
+    max_atlag = 0
+    for i in range(0,len(li)-2):
+        if ((li[i]+li[i+1]+li[i+2])/3)>max_atlag:
+            a,b,c=li[i],li[i+1],li[i+2]
+            max_atlag=(li[i]+li[i+1]+li[i+2])/3
+    print(a,b,c)
+
+double_tomb=np.empty(4,np.double)
+double_tomb[0]=1.144234
+double_tomb[1]=2
+double_tomb[2]=9.214
+double_tomb[3]=7
+def feladat_8(double_tomb,n):
+    novekvo=True
+    for i in range(0,len(double_tomb)-1):
+        if double_tomb[i]>double_tomb[i+1]:
+            novekvo=False
+    return novekvo
+
+tomb=np.empty(5,np.int)
+tomb[0]=1
+tomb[1]=2
+tomb[2]=9
+tomb[3]=7
+tomb[4]=11
+def feladat_9(tomb,n):
+    osztok=[]
+    for i in tomb:
+        for j in range(2,(i//2)+1):
+            if i%j==0 and j not in osztok:
+                osztok.append(j)
+            elif i%j==0 and j in osztok:
+                return 0
+    return 1
+
+tomb=np.empty(5,np.int)
+tomb[0]=1
+tomb[1]=2
+tomb[2]=9
+tomb[3]=7
+tomb[4]=11
+def feladat_10(tomb,n,k):
+    for i in range(0,n-1):
+        minh=i
+        for j in range(i+1,n):
+            if tomb[j]<tomb[minh]:
+                minh=j
+        tomb[i],tomb[minh]=tomb[minh],tomb[i]
+    ah=0
+    fh=n-1
+    kozep=(ah+fh)//2
+    while ah<=fh:
+        osztok=2
+        for i in range(2,(tomb[kozep]//2)+1):
+            if tomb[kozep]+i==0:
+                osztok+=1
+        if osztok>k:
+            return kozep
+        elif osztok<k:
+            ah=kozep+1
+        else:
+            return -1
+
 matrix13=np.empty((3,2),np.int)
 matrix13[0][0]=1
 matrix13[0][1] = 69
@@ -119,6 +210,11 @@ def main():
     print(feladat_3(7))
     print(feladat_4)
     print(feladat_5(7))
+    feladat_6()
+    feladat_7()
+    print(feladat_8(double_tomb, 4))
+    print(feladat_9(tomb, 5))
+    print(feladat_10(tomb, 5, 2))
     print(feladat_14(matrix14,3))
     print(feladat_15(matrix15, 2))
 if __name__ == '__main__':
