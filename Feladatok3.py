@@ -152,30 +152,68 @@ def feladat_10(tomb,n,k):
         else:
             return -1
 
+def feladat_11():
+    n=int(input("Sorok száma: "))
+    m=int(input("Oszlopok száma"))
+    matrix=np.empty((n,m),np.int)
+    indexek=[]
+    for i in range(n):
+        for j in range(m):
+            matrix[i][j]=int(input())
+    for j in range(m):
+        negativ=0
+        nulla=0
+        for i in range(n):
+            if matrix[i][j]<0:
+                negativ+=1
+            elif matrix[i][j]==0:
+                nulla+=1
+        if negativ>=nulla*2:
+            indexek.append(j)
+    return indexek
+
+matrix12=np.empty((3,2),np.int)
+matrix12[0][0]=1
+matrix12[0][1]=69
+matrix12[1][0]=32
+matrix12[1][1]=9
+matrix12[2][0]=2
+matrix12[2][1]=19
+def feladat_12(matrix,n,m):
+    eredmeny=[]
+    for i in range(n):
+        for j in range(m):
+            if (i+j)!=0 and matrix[i][j]%(i+j)==0:
+                eredmeny.append(matrix[i][j])
+    return eredmeny
+
+
+
+
+
 matrix13=np.empty((3,2),np.int)
-matrix13[0][0]=1
+matrix13[0][0]=2
 matrix13[0][1] = 69
 matrix13[1][0] = 32
 matrix13[1][1] = 9
-matrix13[2][0] = 2
+matrix13[2][0] = 1
 matrix13[2][1] = 19
 def feladat_13(matrix,n,m):
-    t=np.empty(m,int)
-    matrix_uj=((n,m),np.int)
-    for i in range(m):
-        min=matrix[i][0]
-        for j in range(n):
-            if matrix[j][i]<min:
-                min=matrix[j][i]
-        for k in range(n):
-            matrix_uj[k][i]=matrix[j][i]-min
-    for q in range(n):
-        for w in range(m):
-            print(matrix_uj[q][w], end=" ")
-        print()
+    matrix_uj=np.empty((n,m),np.int)
+    minimumok=[]
+    for j in range(m):
+        minimum=matrix[j][0]
+        for i in range(n):
+            if matrix[i][j]<minimum:
+                minimum=matrix[i][j]
+        minimumok.append(minimum)
+    for j in range(m):
+        for i in range(n):
+            matrix_uj[i][j]=matrix[i][j]-minimumok[j]
+    return matrix_uj
 
 matrix14=np.empty((3,3),np.int)
-matrix14[0][0]=1
+matrix14[0][0] = 1
 matrix14[0][1] = 69
 matrix14[0][2] = 7
 matrix14[1][0] = 32
@@ -204,6 +242,21 @@ def feladat_15(matrix,n):
             valasz=False
     return valasz
 
+matrix16=np.empty((3,2),np.double)
+matrix16[0][0] = 2
+matrix16[0][1] = 69
+matrix16[1][0] = 32
+matrix16[1][1] = 9
+matrix16[2][0] = 1
+matrix16[2][1] = 19
+transzponalt16=np.empty((2,3),np.double)
+def feladat_16(matrix,n,m,transzponalt):
+    for j in range(m):
+        for i in range(n):
+            transzponalt[j][i]=matrix[i][j]
+    return transzponalt
+
+#17-18-ik feladatot nem vettük
 def main():
     feladat_1()
     print(feladat_2)
@@ -212,10 +265,14 @@ def main():
     print(feladat_5(7))
     feladat_6()
     feladat_7()
-    print(feladat_8(double_tomb, 4))
-    print(feladat_9(tomb, 5))
-    print(feladat_10(tomb, 5, 2))
+    print(feladat_8(double_tomb,4))
+    print(feladat_9(tomb,5))
+    print(feladat_10(tomb,5,2))
+    print(feladat_11())
+    print(feladat_12(matrix12,3,2))
+    print(feladat_13(matrix13, 3, 2))
     print(feladat_14(matrix14,3))
-    print(feladat_15(matrix15, 2))
+    print(feladat_15(matrix15,2))
+    print(feladat_16(matrix16,3,2,transzponalt16))
 if __name__ == '__main__':
     main()
